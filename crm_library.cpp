@@ -92,6 +92,7 @@ void printEditBookMenu()
     cout << "4) Жанр" << endl;
     cout << "0) Выйти в главное меню" << endl;
 }
+
 void editBook(Book& book, arrPtrFuncSet arrFunc[])
 {
 
@@ -223,14 +224,16 @@ void mainMenu(Book*& booksArr, int& sizeBooksArr, arrPtrFuncSet funcPointers[])
                 //Пошук книги за назвою;
                 continue;
             case 6:
-                sortByName(booksArr, sizeBooksArr);
-                cout << "Массив успешно остартирован!" << endl;
+                sorting(booksArr, sizeBooksArr, sortByName);
+                cout << "Массив по названию успешно остартирован!" << endl;
                 continue;
             case 7:
-                //Сортування масиву за автором;
+                sorting(booksArr, sizeBooksArr, sortByAuthor);
+                cout << "Массив по автору успешно остартирован!" << endl;
                 continue;
             case 8:
-                //Сортування масиву за видавництвом.
+                sorting(booksArr, sizeBooksArr, sortByPublHouse);
+                cout << "Массив по издательству успешно остартирован!" << endl;
                 continue;
             case 0:
                 exit(0);
@@ -249,7 +252,7 @@ int main()
     Book book4 {"Эхо молчания", "Николай Федоров", "Печать Века", "Триллер"};
     Book book5 {"Шепот живой природы", "Анна Коваленко", "Лесная Сказка", "Фэнтези"};
     Book book6 {"Мрак ночи", "Сергей Сидоров", "Тень Прошлого", "Ужасы"};
-    Book book7 {"Сердце моря", "Ольга Николаева", "Морские Горизонты", "Романтика"};
+    Book book7 {"Аватар", "Ольга Николаева", "Морские Горизонты", "Романтика"};
     Book book8 {"Шепот ветра", "Дмитрий Иванов", "Созвездие", "Приключения"};
     Book book9 {"Изгнанники времени", "Елена Васильева", "Страницы Времени", "Исторический роман"};
     Book book10 {"Космическая опасность", "Игорь Кузнецов", "Космический Путь", "Научная фантастика"};
