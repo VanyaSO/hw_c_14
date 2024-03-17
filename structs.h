@@ -1,16 +1,12 @@
-//
-// Created by Ivan Ushachov on 17.03.2024.
-//
-
 #ifndef STRUCTS_H
 #define STRUCTS_H
 
 struct Book
 {
-    char* name;
-    char* author;
-    char* publishingHouse;
-    char* genre;
+    char* name = nullptr;
+    char* author = nullptr;
+    char* publishingHouse = nullptr;
+    char* genre = nullptr;
 };
 
 #endif //STRUCTS_H
