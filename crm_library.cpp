@@ -94,46 +94,45 @@ void printEditBookMenu()
 }
 void editBook(Book& book, arrPtrFuncSet arrFunc[])
 {
-    // для удобства arrFunc = [setName, setAuthor, setPublHouse, setGenre]
-    printEditBookMenu();
 
     int action = 0;
+    bool isPrintMenu = true;
 
-    while (true)
+    while(true)
     {
-        cin >> action;
+        if (isPrintMenu)
+            printEditBookMenu();
 
-        if (action == 1)
+        cin >> action;
+        if (action < 0 || action > 4)
         {
-            cout << "Введите новое название: ";
-        }
-        else if (action == 2)
-        {
-            cout << "Введите нового автор: ";
-        }
-        else if (action == 3)
-        {
-            cout << "Введите издательство: ";
-        }
-        else if (action == 4)
-        {
-            cout << "Введите жанр: ";
-        }
-        else if (action == 0)
-        {
-            cout << "0" << endl;
-            break;
-        }
-        else
-        {
-            cout << " Введите коректное значение" << endl;
+            cout << "Введите коректное значение: " << endl;
+            // скрываем меню чтобы оно не отображалось пока пользователь не введет коректное значение
+            isPrintMenu = false;
             continue;
         }
+        // показываем меню
+        isPrintMenu = true;
 
-        break;
+        switch (action) {
+            case 1:
+                cout << "Введите новое название: ";
+                break;
+            case 2:
+                cout << "Введите нового автор: ";
+                break;
+            case 3:
+                cout << "Введите издательство: ";
+                break;
+            case 4:
+                cout << "Введите жанр: ";
+                break;
+            case 0:
+                return;
+        }
+        setBookInfo(book, arrFunc[action-1]);
+        cout << "Данные успешно обновлены!" << endl;
     }
-
-    setBookInfo(book, arrFunc[action-1]);
 }
 
 void addBook(Book*& arr, int& size, Book el)
