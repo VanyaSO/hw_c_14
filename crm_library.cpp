@@ -27,7 +27,8 @@ typedef void (*arrPtrFuncSet)(Book&, char*);
 // для остального пока не писал
 void setName(Book& book, char* value) {
     if (book.name != nullptr) {
-        cout << "Нам пришло " << book.name << endl;
+        // это для теста
+        cout << "Получаем имя setName " << book.name << endl;
 //        delete[] book.name;  // когда удаляю пишет ошибки
     }
 
@@ -38,7 +39,7 @@ void setName(Book& book, char* value) {
     }
     book.name[realSize] = '\0';
 
-    cout << "Вышло " << book.name << endl;
+    cout << "Присваиваем имя setName " << book.name << endl;
 }
 
 void getString(char*& ptrStr, int size)
@@ -56,12 +57,12 @@ void getString(char*& ptrStr, int size)
     }
     ptrStr[realSize] = '\0';
 
-    cout << "STR GET " << ptrStr << endl;
+    cout << "Получили в getStr " << ptrStr << endl;
 
     delete[] newStr;
 }
 
-// Функция, которая инициализирует елемент структуры книги, в зависимости какой указатель на какую фукнцию мы передали
+// Функция, которая инициализирует строку структуры книги, в зависимости какой указатель на какую фукнцию мы передали
 void setBookInfo(Book& book, ptrFuncSet func)
 {
     char* value = nullptr;
@@ -186,17 +187,23 @@ void printMainMenu()
 void mainMenu(Book*& booksArr, int& sizeBooksArr, arrPtrFuncSet funcPointers[])
 {
     int action = 0;
+    bool isPrintMenu = true;
 
     while(true)
     {
-        printMainMenu();
+        if (isPrintMenu)
+            printMainMenu();
 
         cin >> action;
         if (action < 0 || action > 8)
         {
             cout << "Введите коректное значение: " << endl;
+            // скрываем меню чтобы оно не отображалось пока пользователь не введет коректное значение
+            isPrintMenu = false;
             continue;
         }
+        // показываем меню
+        isPrintMenu = true;
 
         switch (action) {
             case 1:
@@ -209,6 +216,7 @@ void mainMenu(Book*& booksArr, int& sizeBooksArr, arrPtrFuncSet funcPointers[])
                 continue;
             case 3:
                 printBooks(booksArr, sizeBooksArr);
+                cout << "Книги распечатаны!" << endl;
             case 4:
                 //Пошук книги за автором;
                 continue;
@@ -217,7 +225,7 @@ void mainMenu(Book*& booksArr, int& sizeBooksArr, arrPtrFuncSet funcPointers[])
                 continue;
             case 6:
                 sortByName(booksArr, sizeBooksArr);
-                cout << "Массив успешно остартирован" << endl;
+                cout << "Массив успешно остартирован!" << endl;
                 continue;
             case 7:
                 //Сортування масиву за автором;
@@ -261,11 +269,10 @@ int main()
         addBook(booksArr, sizeBooksArr, staticArrBook[i]);
     }
 
-    // масив указателей на функции для создания одного из компонентов структуры книги
+    // масив указателей на функции для создания строки структуры книги
     arrPtrFuncSet funcPointers[1] = {setName}; //setAuthor, setPublHouse, setGenre};
 
     mainMenu(booksArr, sizeBooksArr, funcPointers);
-
 
 //    cout << "Введите новое имя: " << endl;
 //    setBookInfo(booksArr[0], funcPointers[0]);
