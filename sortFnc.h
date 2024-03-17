@@ -2,7 +2,6 @@
 #include "structs.h"
 
 typedef int (*ptrFuncSorting)(Book*&, int);
-typedef int (*arrPtrFuncSorting)(Book*&, int);
 
 
 int sortByName(Book*& arr, int index)
@@ -20,8 +19,9 @@ int sortByPublHouse(Book*& arr, int index)
     return strcmp(arr[index].publishingHouse, arr[index + 1].publishingHouse);
 }
 
-arrPtrFuncSorting funcSorting[3] = {sortByName, sortByAuthor, sortByPublHouse};
-
+ptrFuncSorting ptrSortByName = sortByName;
+ptrFuncSorting ptrSortByAuthor = sortByAuthor;
+ptrFuncSorting ptrSortByPublHouse = sortByPublHouse;
 
 void sorting(Book*& arr, int size, ptrFuncSorting func)
 {
