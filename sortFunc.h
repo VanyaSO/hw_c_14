@@ -3,7 +3,6 @@
 
 typedef int (*ptrFuncSorting)(Book*&, int);
 
-
 int sortByName(Book*& arr, int index)
 {
     return strcmp(arr[index].name, arr[index + 1].name);
